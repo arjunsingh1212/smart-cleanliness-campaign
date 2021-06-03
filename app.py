@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, session, redirect
 from flask_sqlalchemy import SQLAlchemy
 from base64 import b64decode
-import face_recognition
 import json
 import os
 import math
@@ -60,47 +59,6 @@ class Feedbacks(db.Model):
 def index():
     # return render_template('login_home.html')
     return redirect('/home')
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        face_match=0
-        image=request.form.get("current_image")
-        email=request.form.get("email")
-        data_uri = image
-        header, encoded = data_uri.split(",", 1)
-        data = b64decode(encoded)
-
-        with open("image.png", "wb") as f:
-            f.write(data)
-
-        got_image = face_recognition.load_image_file("image.png")
-
-        existing_image = face_recognition.load_image_file("students/"+email+".jpg")
-
-        if(len(face_recognition.face_encodings(got_image))):
-            got_image_facialfeatures = face_recognition.face_encodings(got_image)[0]
-
-            existing_image_facialfeatures = face_recognition.face_encodings(existing_image)[0]
-
-            results= face_recognition.compare_faces([existing_image_facialfeatures],got_image_facialfeatures)
-
-            if(len(results)<1):
-                return "No Face Found"
-
-            if(results[0]):
-                face_match=1
-            else:
-                face_match=0
-
-
-        if(face_match==1):
-            # return "<script>alert('welcome')</script>"
-            return redirect('/home')
-        else:
-            # return "<script>alert('face not recognized')</script>"
-            return render_template('login_home.html')
-
 
 def get_image(the_id):
     return Events.query.filter(Events.SerialNumber == the_id).first()
