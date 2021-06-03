@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/feedback-bg.jpg') }}')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>Attempt the Survey</h1>
+          <span class="subheading">Take this survey to predict cleanliness of your locality.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <p>Thank You so much for participating in this online survey.</p>
+      <form name="sentMessage" id="contactForm" action="/survey" method="post" novalidate>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Name</label>
+            <input type="text" class="form-control" placeholder="Name" id="name" name='name' required data-validation-required-message="Please enter your name.">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Area/Locality where you are living.</label>
+            <input type="area" class="form-control" placeholder="Area" id="area" name="area" required data-validation-required-message="Please enter your area/locality.">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Are there enough number of Dustbins(Use Me) present in your locality?</label>
+            <input type="radio" name="enough_number_of_dustbins" value="Yes"> YES 
+            <input type="radio" name="enough_number_of_dustbins" value="No"> NO<br>
+            <label>Is municipal corporation actively working in garbage collection and cleaning?</label>
+            <input type="radio" name="is_municipal_corporation_active" value="Yes"> YES 
+            <input type="radio" name="is_municipal_corporation_active" value="No"> NO<br>
+            <label>Are there any cases of illness in your locality due to unhygienic environment?</label>
+            <input type="radio" name="illness_due_to_unhygien_env" value="Yes"> YES 
+            <input type="radio" name="illness_due_to_unhygien_env" value="No"> NO<br>
+            <label>Have there even been any cleanliness campaigns in your locality before?</label>
+            <input type="radio" name="prev_cleanliness_campaign" value="Yes"> YES 
+            <input type="radio" name="prev_cleanliness_campaign" value="No"> NO<br>
+            <label>Are there any stray animals in your locality?</label>
+            <input type="radio" name="any_stray_animals_present" value="Yes"> YES 
+            <input type="radio" name="any_stray_animals_present" value="No"> NO<br>
+            <label>Is there awareness about hygiene and cleanliness in your locality?</label>
+            <input type="radio" name="aware_about_cleanliness" value="Yes"> YES 
+            <input type="radio" name="aware_about_cleanliness" value="No"> NO<br>
+            <label>Do people of your locality always throws waste in dustbins?</label>
+            <input type="radio" name="is_waste_in_dustbin_always" value="Yes"> YES 
+            <input type="radio" name="is_waste_in_dustbin_always" value="No"> NO<br>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <br>
+        <div id="success"></div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-lg btn-outline-dark" id="sendMessageButton">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

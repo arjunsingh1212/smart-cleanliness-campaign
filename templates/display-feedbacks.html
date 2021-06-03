@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block body %}
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/home-bg.jpg') }}')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>{{params['site_name']}}</h1>
+          <span class="subheading">{{params['tag_line']}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <a href="/dashboard"><button class="btn btn-lg btn-outline-dark">Dashboard Home</button></a>
+      <a href="/logout"><button class="btn btn-lg btn-outline-dark">Logout</button></a>
+      <h1>Displaying Feedbacks</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Serial Number</th>
+            <th>Name</th>
+            <th>Email ID</th>
+            <th>Feedback</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for feedback in feedbacks %}
+          <tr>
+            <td>{{feedback.SerialNumber}}</td>
+            <td>{{feedback.Name}}</td>
+            <td>{{feedback.Email}}</td>
+            <td>{{feedback.Feedback}}</td>
+            <td>{{feedback.Date}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
